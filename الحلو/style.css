@@ -1,0 +1,556 @@
+/* بداية كود CSS */
+        
+        /* ========== إعادة تعيين الأنماط ========== */
+        * { /* محدد عام */
+            margin: 0; /* إزالة الهوامش */
+            padding: 0; /* إزالة الحشو */
+            box-sizing: border-box; /* حساب الحجم مع الحشو */
+        }
+        
+        /* ========== الجسم الرئيسي ========== */
+        body { /* تنسيق الجسم */
+            font-family: 'Poppins', sans-serif; /* الخط الأساسي */
+            background-color: #0f0f0f; /* لون الخلفية الداكن */
+            color: #ffffff; /* لون النص الأبيض */
+            min-height: 100vh; /* أقل ارتفاع */
+            overflow-x: hidden; /* منع التمرير الأفقي */
+        }
+        
+        /* ========== الخلفية المتحركة ========== */
+        .bg-animation { /* طبقة الخلفية */
+            position: fixed; /* تثبيت الموقع */
+            top: 0; /* المسافة من الأعلى */
+            left: 0; /* المسافة من اليسار */
+            width: 100%; /* العرض الكامل */
+            height: 100%; /* الارتفاع الكامل */
+            pointer-events: none; /* تجاهل أحداث الماوس */
+            z-index: 0; /* الترتيب الطبقي */
+        }
+        
+        .bg-animation::before { /* عنصر زائف */
+            content: ''; /* محتوى فارغ */
+            position: absolute; /* موقع مطلق */
+            top: -50%; /* الموقع من الأعلى */
+            left: -50%; /* الموقع من اليسار */
+            width: 200%; /* عرض مضاعف */
+            height: 200%; /* ارتفاع مضاعف */
+            background: radial-gradient(circle at 20% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 200, 100, 0.08) 0%, transparent 50%);
+            animation: bgMove 20s ease-in-out infinite; /* حركة الخلفية */
+        }
+        
+        @keyframes bgMove { /* تعريف الحركة */
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-5%, -5%); }
+        }
+        
+        /* ========== الرأس والتنقل ========== */
+        header { /* تنسيق الرأس */
+            position: fixed; /* تثبيت عند التمرير */
+            top: 0; /* من الأعلى */
+            left: 0; /* من اليسار */
+            width: 100%; /* العرض الكامل */
+            z-index: 1000; /* الترتيب الطبقي */
+            padding: 20px 0; /* الحشو العمودي */
+            transition: all 0.3s ease; /* انتقال سلس */
+        }
+        
+        header.scrolled { /* عند التمرير */
+            background: rgba(15, 15, 15, 0.95); /* خلفية شبه شفافة */
+            backdrop-filter: blur(10px); /* تأثير الضبابية */
+            box-shadow: 0 2px 20px rgba(255, 165, 0, 0.1); /* ظل خفيف */
+        }
+        
+        nav { /* شريط التنقل */
+            max-width: 1400px; /* أقصى عرض */
+            margin: 0 auto; /* توسيط أفقي */
+            padding: 0 40px; /* الحشو الجانبي */
+            display: flex; /* عرض مرن */
+            justify-content: space-between; /* توزيع العناصر */
+            align-items: center; /* محاذاة عمودية */
+        }
+        
+        .logo { /* الشعار */
+            font-family: 'Playfair Display', serif; /* خط الشعار */
+            font-size: 2rem; /* حجم الخط */
+            font-weight: 700; /* سمك الخط */
+            color: #ffb347; /* اللون البرتقالي */
+            text-decoration: none; /* بدون تسطير */
+            letter-spacing: 2px; /* تباعد الأحرف */
+            transition: color 0.3s ease; /* انتقال سلس */
+        }
+        
+        .logo:hover { /* عند مرور الماوس */
+            color: #ffd700; /* لون ذهبي */
+        }
+        
+        .nav-links { /* قائمة التنقل */
+            display: flex; /* عرض مرن */
+            gap: 40px; /* المسافة بين العناصر */
+            list-style: none; /* بدون نقاط */
+        }
+        
+        .nav-links a { /* روابط التنقل */
+            color: #ffffff; /* لون النص */
+            text-decoration: none; /* بدون تسطير */
+            font-size: 0.9rem; /* حجم الخط */
+            font-weight: 500; /* سمك الخط */
+            text-transform: uppercase; /* أحرف كبيرة */
+            letter-spacing: 1px; /* تباعد الأحرف */
+            position: relative; /* موقع نسبي */
+            padding: 5px 0; /* الحشو العمودي */
+            transition: color 0.3s ease; /* انتقال سلس */
+        }
+        
+        .nav-links a::after { /* خط تحت الرابط */
+            content: ''; /* محتوى فارغ */
+            position: absolute; /* موقع مطلق */
+            bottom: 0; /* من الأسفل */
+            left: 0; /* من اليسار */
+            width: 0; /* عرض أولي */
+            height: 2px; /* الارتفاع */
+            background: linear-gradient(90deg, #ffb347, #ffd700); /* تدرج لوني */
+            transition: width 0.3s ease; /* انتقال سلس */
+        }
+        
+        .nav-links a:hover { /* عند مرور الماوس */
+            color: #ffb347; /* لون برتقالي */
+        }
+        
+        .nav-links a:hover::after { /* الخط عند المرور */
+            width: 100%; /* العرض الكامل */
+        }
+        
+        /* ========== قسم البطل ========== */
+        .hero { /* القسم الرئيسي */
+            min-height: 100vh; /* ارتفاع الشاشة */
+            display: flex; /* عرض مرن */
+            align-items: center; /* محاذاة عمودية */
+            justify-content: center; /* محاذاة أفقية */
+            position: relative; /* موقع نسبي */
+            padding: 120px 40px 80px; /* الحشو */
+            overflow: hidden; /* إخفاء الزائد */
+        }
+        
+        .hero-content { /* محتوى البطل */
+            display: grid; /* عرض شبكي */
+            grid-template-columns: 1fr 1fr; /* عمودين */
+            gap: 60px; /* المسافة */
+            max-width: 1400px; /* أقصى عرض */
+            width: 100%; /* العرض الكامل */
+            align-items: center; /* محاذاة عمودية */
+        }
+        
+        .hero-text { /* النص */
+            z-index: 10; /* الترتيب */
+        }
+        
+        .hero-text h1 { /* العنوان الرئيسي */
+            font-family: 'Playfair Display', serif; /* الخط */
+            font-size: 4rem; /* الحجم */
+            font-weight: 700; /* السمك */
+            line-height: 1.1; /* ارتفاع السطر */
+            margin-bottom: 30px; /* الهامش السفلي */
+            opacity: 0; /* الشفافية */
+            transform: translateY(30px); /* الإزاحة */
+            animation: fadeInUp 1s ease forwards; /* الحركة */
+        }
+        
+        .hero-text h1 span { /* الجزء الملون */
+            color: #ffb347; /* اللون */
+            display: block; /* عرض ككتلة */
+        }
+        
+        .hero-text p { /* الفقرة */
+            font-size: 1.1rem; /* الحجم */
+            color: rgba(255, 255, 255, 0.8); /* اللون */
+            line-height: 1.8; /* ارتفاع السطر */
+            margin-bottom: 40px; /* الهامش */
+            opacity: 0; /* الشفافية */
+            transform: translateY(30px); /* الإزاحة */
+            animation: fadeInUp 1s ease 0.3s forwards; /* الحركة */
+        }
+        
+        .hero-buttons { /* الأزرار */
+            display: flex; /* عرض مرن */
+            gap: 20px; /* المسافة */
+            opacity: 0; /* الشفافية */
+            transform: translateY(30px); /* الإزاحة */
+            animation: fadeInUp 1s ease 0.5s forwards; /* الحركة */
+        }
+        
+        .btn { /* الزر العام */
+            padding: 15px 40px; /* الحشو */
+            border-radius: 50px; /* حواف دائرية */
+            font-size: 0.95rem; /* الحجم */
+            font-weight: 600; /* السمك */
+            text-transform: uppercase; /* أحرف كبيرة */
+            letter-spacing: 1px; /* التباعد */
+            text-decoration: none; /* بدون تسطير */
+            transition: all 0.4s ease; /* انتقال سلس */
+            cursor: pointer; /* شكل المؤشر */
+            border: none; /* بدون حدود */
+        }
+        
+        .btn-primary { /* الزر الرئيسي */
+            background: linear-gradient(135deg, #ffb347, #ff8c00); /* التدرج */
+            color: #0f0f0f; /* لون النص */
+            box-shadow: 0 10px 30px rgba(255, 179, 71, 0.3); /* الظل */
+        }
+        
+        .btn-primary:hover { /* عند المرور */
+            transform: translateY(-3px); /* الرفع */
+            box-shadow: 0 15px 40px rgba(255, 179, 71, 0.4); /* الظل */
+        }
+        
+        .btn-secondary { /* الزر الثانوي */
+            background: transparent; /* شفاف */
+            color: #ffffff; /* لون النص */
+            border: 2px solid rgba(255, 255, 255, 0.3); /* الحدود */
+        }
+        
+        .btn-secondary:hover { /* عند المرور */
+            border-color: #ffb347; /* لون الحدود */
+            color: #ffb347; /* لون النص */
+            transform: translateY(-3px); /* الرفع */
+        }
+        
+        /* ========== صورة البطل ========== */
+        .hero-image { /* حاوية الصورة */
+            position: relative; /* موقع نسبي */
+            z-index: 10; /* الترتيب */
+        }
+        
+        .hero-image img { /* الصورة */
+            width: 100%; /* العرض */
+            max-width: 600px; /* أقصى عرض */
+            border-radius: 20px; /* حواف دائرية */
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); /* الظل */
+            opacity: 0; /* الشفافية */
+            transform: scale(0.9); /* الحجم */
+            animation: scaleIn 1s ease 0.3s forwards; /* الحركة */
+        }
+        
+        .floating-element { /* عنصر عائم */
+            position: absolute; /* موقع مطلق */
+            background: rgba(255, 179, 71, 0.2); /* اللون */
+            border-radius: 50%; /* شكل دائري */
+            animation: float 6s ease-in-out infinite; /* الحركة */
+        }
+        
+        .floating-element:nth-child(1) { /* العنصر الأول */
+            width: 80px; /* العرض */
+            height: 80px; /* الارتفاع */
+            top: -20px; /* الأعلى */
+            left: -40px; /* اليسار */
+        }
+        
+        .floating-element:nth-child(2) { /* العنصر الثاني */
+            width: 60px; /* العرض */
+            height: 60px; /* الارتفاع */
+            bottom: 50px; /* الأسفل */
+            right: -30px; /* اليمين */
+            animation-delay: 2s; /* التأخير */
+        }
+        
+        .floating-element:nth-child(3) { /* العنصر الثالث */
+            width: 40px; /* العرض */
+            height: 40px; /* الارتفاع */
+            top: 50%; /* الأعلى */
+            left: -60px; /* اليسار */
+            animation-delay: 4s; /* التأخير */
+        }
+        
+        /* ========== الحركات ========== */
+        @keyframes fadeInUp { /* حركة الظهور */
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn { /* حركة التكبير */
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes float { /* حركة الطفو */
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* ========== قسم المنتجات ========== */
+        .offerings { /* قسم العروض */
+            padding: 10px 40px; /* الحشو */
+            position: relative; /* موقع نسبي */
+            z-index: 10; /* الترتيب */
+        }
+        
+        .section-title { /* عنوان القسم */
+            text-align: center; /* محاذاة وسط */
+            margin-bottom: 60px; /* الهامش */
+        }
+        
+        .section-title h2 { /* العنوان */
+            font-family: 'Playfair Display', serif; /* الخط */
+            font-size: 2.5rem; /* الحجم */
+            color: #ffffff; /* اللون */
+            margin-bottom: 15px; /* الهامش */
+        }
+        
+        .section-title span { /* الجزء الملون */
+            color: #ffb347; /* اللون */
+        }
+        
+        .section-title p { /* الفقرة */
+            color: rgba(255, 255, 255, 0.6); /* اللون */
+            font-size: 1rem; /* الحجم */
+        }
+        
+        .offerings-grid { /* شبكة المنتجات */
+            display: grid; /* عرض شبكي */
+            grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+            gap: 40px; /* المسافة */
+            max-width: 1200px; /* أقصى عرض */
+            margin: 0 auto; /* توسيط */
+        }
+        
+        .offering-card { /* بطاقة المنتج */
+            text-align: center; /* محاذاة وسط */
+            padding: 40px 30px; /* الحشو */
+            background: rgba(255, 255, 255, 0.03); /* الخلفية */
+            border-radius: 20px; /* الحواف */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* الحدود */
+            transition: all 0.4s ease; /* انتقال سلس */
+            opacity: 0; /* الشفافية */
+            transform: translateY(40px); /* الإزاحة */
+        }
+        
+        .offering-card.visible { /* عند الظهور */
+            opacity: 1; /* الشفافية */
+            transform: translateY(0); /* الموقع */
+        }
+        
+        .offering-card:hover { /* عند المرور */
+            transform: translateY(-10px); /* الرفع */
+            background: rgba(255, 179, 71, 0.05); /* الخلفية */
+            border-color: rgba(255, 179, 71, 0.2); /* الحدود */
+            box-shadow: 0 20px 40px rgba(255, 179, 71, 0.1); /* الظل */
+        }
+        
+        .offering-image { /* صورة المنتج */
+            width: 180px; /* العرض */
+            height: 180px; /* الارتفاع */
+            border-radius: 50%; /* شكل دائري */
+            object-fit: cover; /* الملاءمة */
+            margin-bottom: 25px; /* الهامش */
+            border: 3px solid rgba(255, 179, 71, 0.3); /* الحدود */
+            transition: all 0.4s ease; /* انتقال سلس */
+        }
+        
+        .offering-card:hover .offering-image { /* عند المرور */
+            border-color: #ffb347; /* لون الحدود */
+            transform: scale(1.05); /* تكبير */
+        }
+        
+        .offering-card h3 { /* عنوان المنتج */
+            font-family: 'Playfair Display', serif; /* الخط */
+            font-size: 1.5rem; /* الحجم */
+            color: #ffffff; /* اللون */
+            margin-bottom: 15px; /* الهامش */
+        }
+        
+        .offering-card p { /* وصف المنتج */
+            color: rgba(255, 255, 255, 0.6); /* اللون */
+            font-size: 0.95rem; /* الحجم */
+            line-height: 1.7; /* ارتفاع السطر */
+        }
+        
+        /* ========== قسم الاتصال ========== */
+        .contact { /* قسم الاتصال */
+            padding: 100px 40px; /* الحشو */
+            background: rgba(255, 255, 255, 0.02); /* الخلفية */
+            position: relative; /* موقع نسبي */
+            z-index: 10; /* الترتيب */
+        }
+        
+        .contact-content { /* محتوى الاتصال */
+            max-width: 1200px; /* أقصى عرض */
+            margin: 0 auto; /* توسيط */
+            display: grid; /* عرض شبكي */
+            grid-template-columns: 1fr 1fr; /* عمودين */
+            gap: 60px; /* المسافة */
+            align-items: start; /* محاذاة */
+        }
+        
+        .contact-info { /* معلومات الاتصال */
+            padding: 40px; /* الحشو */
+        }
+        
+        .contact-info h2 { /* العنوان */
+            font-family: 'Playfair Display', serif; /* الخط */
+            font-size: 2.5rem; /* الحجم */
+            color: #ffffff; /* اللون */
+            margin-bottom: 30px; /* الهامش */
+        }
+        
+        .contact-info h2 span { /* الجزء الملون */
+            color: #ffb347; /* اللون */
+        }
+        
+        .contact-item { /* عنصر الاتصال */
+            display: flex; /* عرض مرن */
+            align-items: center; /* محاذاة */
+            gap: 20px; /* المسافة */
+            margin-bottom: 25px; /* الهامش */
+            padding: 20px; /* الحشو */
+            background: rgba(224, 228, 225, 0.03); /* الخلفية */
+            border-radius: 15px; /* الحواف */
+            transition: all 0.3s ease; /* انتقال سلس */
+        }
+        
+        .contact-item:hover { /* عند المرور */
+            background: rgba(255, 179, 71, 0.08); /* الخلفية */
+            transform: translateX(-10px); /* إزاحة لليسار في LTR */
+        }
+        
+        .contact-icon { /* أيقونة الاتصال */
+            width: 50px; /* العرض */
+            height: 50px; /* الارتفاع */
+            background: linear-gradient(135deg, #ffb347, #ff8c00); /* التدرج */
+            border-radius: 50%; /* شكل دائري */
+            display: flex; /* عرض مرن */
+            align-items: center; /* محاذاة */
+            justify-content: center; /* توسيط */
+            flex-shrink: 0; /* منع التصغير */
+        }
+        
+        .contact-icon svg { /* الأيقونة */
+            width: 24px; /* العرض */
+            height: 24px; /* الارتفاع */
+            fill: #0f0f0f; /* اللون */
+        }
+        
+        .contact-details h4 { /* عنوان التفاصيل */
+            color: #ffffff; /* اللون */
+            font-size: 1rem; /* الحجم */
+            margin-bottom: 5px; /* الهامش */
+        }
+        
+        .contact-details p { /* نص التفاصيل */
+            color: rgba(255, 255, 255, 0.6); /* اللون */
+            font-size: 0.9rem; /* الحجم */
+        }
+        
+        .contact-details a { /* رابط التفاصيل */
+            color: #ffb347; /* اللون */
+            text-decoration: none; /* بدون تسطير */
+            transition: color 0.3s ease; /* انتقال سلس */
+        }
+        
+        .contact-details a:hover { /* عند المرور */
+            color: #ffd700; /* اللون */
+        }
+        
+        /* ========== الخريطة ========== */
+        .contact-map { /* حاوية الخريطة */
+            background: rgba(255, 255, 255, 0.05); /* الخلفية */
+            border-radius: 20px; /* الحواف */
+            padding: 20px; /* الحشو */
+            height: 100%; /* الارتفاع */
+            min-height: 450px; /* أقل ارتفاع */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* الحدود */
+            overflow: hidden; /* إخفاء الزائد */
+        }
+        
+        .contact-map iframe { /* الخريطة */
+            width: 100%; /* العرض */
+            height: 100%; /* الارتفاع */
+            min-height: 410px; /* أقل ارتفاع */
+            border: 0; /* بدون حدود */
+            border-radius: 15px; /* الحواف */
+        }
+        
+        /* ========== التذييل ========== */
+        footer { /* التذييل */
+            padding: 40px; /* الحشو */
+            text-align: center; /* محاذاة وسط */
+            border-top: 1px solid rgba(255, 255, 255, 0.08); /* الحد العلوي */
+            position: relative; /* موقع نسبي */
+            z-index: 10; /* الترتيب */
+        }
+        
+        footer p { /* نص التذييل */
+            color: rgba(255, 255, 255, 0.5); /* اللون */
+            font-size: 0.9rem; /* الحجم */
+        }
+        
+        footer span { /* الجزء الملون */
+            color: #ffb347; /* اللون */
+        }
+        
+        /* ========== التصميم المتجاوب ========== */
+        @media (max-width: 1024px) { /* للشاشات المتوسطة */
+            .hero-content { /* محتوى البطل */
+                grid-template-columns: 1fr; /* عمود واحد */
+                text-align: center; /* محاذاة وسط */
+            }
+            
+            .hero-image { /* صورة البطل */
+                order: -1; /* تقديم الصورة */
+            }
+            
+            .hero-buttons { /* الأزرار */
+                justify-content: center; /* توسيط */
+            }
+            
+            .offerings-grid { /* شبكة المنتجات */
+                grid-template-columns: repeat(2, 1fr); /* عمودين */
+            }
+            
+            .contact-content { /* محتوى الاتصال */
+                grid-template-columns: 1fr; /* عمود واحد */
+            }
+        }
+        
+        @media (max-width: 768px) { /* للشاشات الصغيرة */
+            nav { /* التنقل */
+                padding: 0 20px; /* الحشو */
+            }
+            
+            .nav-links { /* الروابط */
+                gap: 20px; /* المسافة */
+            }
+            
+            .hero { /* البطل */
+                padding: 100px 20px 60px; /* الحشو */
+            }
+            
+            .hero-text h1 { /* العنوان */
+                font-size: 2.5rem; /* الحجم */
+            }
+            
+            .offerings-grid { /* الشبكة */
+                grid-template-columns: 1fr; /* عمود واحد */
+            }
+            
+            .offerings { /* العروض */
+                padding: 60px 20px; /* الحشو */
+            }
+            
+            .contact { /* الاتصال */
+                padding: 60px 20px; /* الحشو */
+            }
+            
+            .contact-map { /* الخريطة */
+                min-height: 350px; /* الارتفاع */
+            }
+            
+            .hero-buttons { /* الأزرار */
+                flex-direction: column; /* اتجاه عمودي */
+                align-items: center; /* توسيط */
+            }
+        }
+        
